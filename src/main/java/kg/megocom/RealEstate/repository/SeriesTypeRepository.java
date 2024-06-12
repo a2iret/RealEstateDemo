@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SeriesTypeRepository extends JpaRepository<SeriesType, Long> {
+    SeriesType findByName(String name);
 }

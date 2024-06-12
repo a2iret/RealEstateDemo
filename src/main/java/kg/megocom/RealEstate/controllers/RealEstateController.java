@@ -1,24 +1,26 @@
 package kg.megocom.RealEstate.controllers;
 
+import kg.megocom.RealEstate.dto.AdDto;
 import kg.megocom.RealEstate.models.*;
 import kg.megocom.RealEstate.service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("api/v1")
 public class RealEstateController {
+    private final RealEstateService realEstateService;
     private final DealTypeService dealTypeService;
     private final PropertyTypeService propertyTypeService;
     private final BuildingTypeService buildingTypeService;
     private final SeriesTypeService seriesTypeService;
     private final HeatingService heatingService;
+    private final HouseComplexService houseComplexService;
     private final ConditionService conditionService;
     private final CountRoomService countRoomService;
     private final LocationService locationService;
@@ -28,6 +30,39 @@ public class RealEstateController {
     private final PriceTypeService priceTypeService;
     private final CurrencyService currencyService;
 
+
+    @PostMapping("/real-estate/create")
+    public ResponseEntity<String> realEstateCreate(Long dealType, Long propertyType, Integer countRoom,
+                                                   Long houseComplex, Long seriesType,
+                                                   Long buildingType, Long heating,
+                                                   Long condition, Long location,
+                                                   Long priceType, Long currency,
+                                                   Long mortgage, Long installmentPlan,
+                                                   Long exchangeOption, Integer yearBuild,
+                                                   Integer floor, String houseNumber,
+                                                   String streetName, BigDecimal price){
+        return ResponseEntity.ok(realEstateService.createRealEstate(dealType, propertyType, countRoom,
+                houseComplex, seriesType,buildingType, heating, condition, location, priceType, currency,
+                mortgage,installmentPlan, exchangeOption, yearBuild, floor,
+                houseNumber, streetName, price));
+    }
+
+    @GetMapping("/real-estate/listings")
+    public ResponseEntity<List<AdDto>> realEstateListing(@RequestParam(required = false) String dealTypeName,
+                                                         @RequestParam(required = false) String propertyTypeName, @RequestParam(required = false) Integer countRoom,
+                                                         @RequestParam(required = false) String houseComplex, @RequestParam(required = false) String seriesType,
+                                                         @RequestParam(required = false) String buildingType, @RequestParam(required = false) String heating,
+                                                         @RequestParam(required = false) String condition, @RequestParam(required = false) String location,
+                                                         @RequestParam(required = false) String priceType, @RequestParam(required = false) String currency,
+                                                         @RequestParam(required = false) String mortgage, @RequestParam(required = false) String installmentPlan,
+                                                         @RequestParam(required = false) String exchangeOption, @RequestParam(required = false) Integer yearBuild,
+                                                         @RequestParam(required = false) Integer floor, @RequestParam(required = false) String houseNumber,
+                                                         @RequestParam(required = false) String streetName, @RequestParam(required = false) BigDecimal price){
+
+        return ResponseEntity.ok(realEstateService.getAllParameters(dealTypeName, propertyTypeName, countRoom, houseComplex, seriesType,buildingType,
+                heating, condition, location, priceType, currency,mortgage,installmentPlan, exchangeOption, yearBuild, floor,
+                houseNumber, streetName, price));
+    }
 
     @GetMapping("/show-all/deal-type")
     public ResponseEntity<List<DealType>> getAllDealType() {
@@ -45,6 +80,10 @@ public class RealEstateController {
     @GetMapping("/show-all/series-type")
     public ResponseEntity<List<SeriesType>> getAllSeriesType() {
         return ResponseEntity.ok(seriesTypeService.getAllSeriesType());
+    }
+    @GetMapping("/show-all/house-complexes")
+    public ResponseEntity<List<HouseComplex>> getAllHouseComplexes(){
+        return ResponseEntity.ok(houseComplexService.getAllHouseComplex());
     }
     @GetMapping("/show-all/heating")
     public ResponseEntity<List<Heating>> getAllHeating() {

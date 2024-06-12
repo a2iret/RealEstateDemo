@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HeatingRepository extends JpaRepository<Heating, Long> {
+    Heating findByName(String name);
 }

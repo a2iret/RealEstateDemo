@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface InstallmentPlanRepository extends JpaRepository<InstallmentPlan, Long> {
+    InstallmentPlan findByName(String name);
 }

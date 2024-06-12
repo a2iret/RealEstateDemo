@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CountRoomsRepository extends JpaRepository<CountRoom, Long> {
+public interface CountRoomRepository extends JpaRepository<CountRoom, Long> {
+    CountRoom findByCount(Integer count);
 }

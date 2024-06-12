@@ -1,10 +1,9 @@
 package kg.megocom.RealEstate.repository;
 
-import kg.megocom.RealEstate.models.Mortgage;
+import kg.megocom.RealEstate.models.CurrencyRate;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MortgageRepository extends JpaRepository<Mortgage, Long> {
-    Mortgage findByName(String name);
+public interface CurrencyRateRepository extends JpaRepository<CurrencyRate, Long> {
 }

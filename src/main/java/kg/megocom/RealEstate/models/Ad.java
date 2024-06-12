@@ -2,7 +2,10 @@ package kg.megocom.RealEstate.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
+
+import java.math.BigDecimal;
 
 @Entity
 @Getter
@@ -10,6 +13,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "ads")
+@Accessors(chain = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Ad {
     @Id
@@ -53,15 +57,16 @@ public class Ad {
     Location location;
 
     @ManyToOne
-    @JoinColumn(name = "price_id")
+    @JoinColumn(name = "price_type_id")
     PriceType priceType;
 
     @ManyToOne
     @JoinColumn(name = "currency_id")
     Currency currency;
 
-    int yearBuild;
-    int floor;
+    BigDecimal price;
+    Integer yearBuild;
+    Integer floor;
     String houseNumber;
     String streetName;
 

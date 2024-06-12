@@ -1,16 +1,16 @@
 package kg.megocom.RealEstate.service;
 
 import kg.megocom.RealEstate.models.CountRoom;
-import kg.megocom.RealEstate.repository.CountRoomsRepository;
+import kg.megocom.RealEstate.repository.CountRoomRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class CountRoomService {
-    private final CountRoomsRepository countRoomsRepository;
+    private final CountRoomRepository countRoomsRepository;
 
-    public CountRoomService(CountRoomsRepository countRoomsRepository) {
+    public CountRoomService(CountRoomRepository countRoomsRepository) {
         this.countRoomsRepository = countRoomsRepository;
     }
 

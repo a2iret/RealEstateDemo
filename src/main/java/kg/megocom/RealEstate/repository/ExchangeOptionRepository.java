@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ExchangeOptionRepository extends JpaRepository<ExchangeOption, Long> {
+    ExchangeOption findByName(String name);
 }

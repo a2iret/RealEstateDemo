@@ -17,7 +17,7 @@ public class CountRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    int count;
+    Integer count;
 
     @OneToMany(mappedBy = "countRoom")
     List<Ad> ads;
